@@ -66,7 +66,7 @@ export default {
         fluid: true,
         withCredentials: false,
         techOrder: ["youtube"],
-        autoplay: false,
+        autoplay: true,
         controls: true,
         youtube: {
           customVars: {
