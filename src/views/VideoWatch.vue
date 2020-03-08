@@ -1,13 +1,33 @@
 <template>
   <div>
-    <h1>Watch Video</h1>
-
     <v-container>
+      <h1>Watch Video</h1>
       <v-row>
         <v-col md="9" cols="12">
-          <video-player class="video-player-box" ref="videoPlayer" :options="playerOptions"></video-player>
+          <video-player
+            class="video-player-box"
+            ref="videoPlayer"
+            :options="playerOptions"
+          ></video-player>
         </v-col>
-        <v-col md="3" cols="12"></v-col>
+        <v-col md="3" cols="12">
+          <div class="display-1">{{ video.title }}</div>
+          <div>
+            <p>{{ video.desc }}</p>
+          </div>
+          <div>
+            <v-btn
+              v-for="tag in tags"
+              :key="tag.id"
+              color="primary"
+              :to="`/tag/${tag.id}`"
+              class="mr-2"
+            >
+              <v-icon>{{ tag.icon }}</v-icon>
+              {{ tag.title }}
+            </v-btn>
+          </div>
+        </v-col>
       </v-row>
     </v-container>
   </div>
@@ -28,20 +48,27 @@ export default {
         {}
       );
     },
+    tags() {
+      return this.video.tags.map(tag => {
+        const tmpTag = this.$store.state.tags.find(_tag => _tag.id == tag);
+        return tmpTag;
+      });
+    },
     playerOptions() {
       return {
         sources: [
           {
             type: "video/youtube",
-            src: this.video.url
+            src: this.video.url,
+            withCredentials: false
           }
         ],
         fluid: true,
+        withCredentials: false,
         techOrder: ["youtube"],
         autoplay: false,
         controls: true,
         youtube: {
-          ytControls: 2,
           customVars: {
             wmode: "transparent"
           }

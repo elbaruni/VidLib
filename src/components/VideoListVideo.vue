@@ -14,9 +14,8 @@
       <v-spacer></v-spacer>
 
       <v-btn
-        v-for="tag in video.tags"
+        v-for="tag in tags"
         :key="tag.id"
-        outlined
         color="primary"
         :to="`/tag/${tag.id}`"
       >
@@ -30,7 +29,16 @@
 
 <script>
 export default {
-  props: ["video"]
+  props: ["video"],
+  mounted() {},
+  computed: {
+    tags() {
+      return this.video.tags.map(tag => {
+        const tmpTag = this.$store.state.tags.find(_tag => _tag.id == tag);
+        return tmpTag;
+      });
+    }
+  }
 };
 </script>
 

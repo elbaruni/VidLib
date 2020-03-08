@@ -1,6 +1,6 @@
 <template>
   <v-app>
-    <v-app-bar app color="deep-purple darken-2" dark class="mb-0">
+    <v-app-bar app color="primary" dark class="mb-0">
       <v-toolbar-title>
         <router-link to="/" class="white--text" tag="span" style="cursor:pointer">MAWTINI</router-link>
       </v-toolbar-title>
